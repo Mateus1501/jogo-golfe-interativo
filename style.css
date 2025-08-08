@@ -1,15 +1,76 @@
+:root {
+    --primary-color: #006400;
+    --accent-color: #90ee90;
+    --light-bg: #f4fff4;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Arial, sans-serif;
-    background-color: #e0ffe0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
     margin: 0;
     padding: 20px;
 }
 
+body.main-page {
+    display: block;
+    padding: 0;
+}
+
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://images.unsplash.com/photo-1501700493788-fa1a7233cd3a?auto=format&fit=crop&w=1350&q=80')
+            center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: var(--primary-color);
+}
+
+.tab {
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tab-content {
+    display: none;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 #campo {
-    border: 2px solid #006400;
-    background-color: #90ee90;
+    border: 2px solid var(--primary-color);
+    background-color: var(--accent-color);
     cursor: crosshair;
 }
