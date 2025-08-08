@@ -1,70 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campo de Golfe</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header class="hero">
-        <h1>Campo de Golfe Vista Verde</h1>
-        <p>Onde cada tacada encontra a natureza</p>
-    </header>
-    <nav class="tabs">
-        <button class="tab active" data-target="sobre">Sobre o Campo</button>
         <button class="tab" data-target="associar">Associar-se</button>
         <button class="tab" data-target="tabela">Tabela de Green-fee</button>
         <button class="tab" data-target="contatos">Contatos</button>
     </nav>
-    <main>
-        <section id="sobre" class="tab-content active">
-            <div>
-                <h2>Sobre o campo</h2>
-                <p>
-                    Localizado em meio a colinas exuberantes, o Campo de Golfe Vista Verde oferece 18 buracos de puro
-                    desafio e paisagens de tirar o fôlego. Nosso campo foi projetado para proporcionar uma experiência
-                    única para jogadores de todos os níveis.
-                </p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1504600770771-7b753b898621?auto=format&fit=crop&w=800&q=80" alt="Foto do campo">
-        </section>
-        <section id="associar" class="tab-content">
-            <h2>Associar-se</h2>
-            <ul class="benefits">
-                <li>Acesso ilimitado ao campo</li>
-                <li>Eventos exclusivos</li>
-                <li>Descontos na loja</li>
-            </ul>
-            <form id="membership-form" class="forms">
-                <input type="text" placeholder="Nome" required>
-                <input type="email" placeholder="Email" required>
-                <button type="submit">Quero me associar</button>
-            </form>
-        </section>
-        <section id="tabela" class="tab-content">
-            <h2>Tabela de Green-fee</h2>
-            <table class="fees-table">
-                <thead>
-                    <tr><th>Dia</th><th>18 buracos</th><th>9 buracos</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Segunda a Sexta</td><td>R$150</td><td>R$90</td></tr>
-                    <tr><td>Finais de semana</td><td>R$220</td><td>R$130</td></tr>
-                </tbody>
-            </table>
-        </section>
-        <section id="contatos" class="tab-content">
-            <h2>Contatos</h2>
-            <form id="contact-form" class="forms">
-                <input type="text" placeholder="Nome" required>
-                <input type="email" placeholder="Email" required>
-                <textarea rows="4" placeholder="Mensagem" required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-            <p>Email: contato@vistaverde.com.br<br>Telefone: (11) 1234-5678</p>
-        </section>
-    </main>
+
+    <section id="sobre" class="tab-content active">
+        <h2>Sobre o campo</h2>
+        <p>Conheça a história e a infraestrutura do nosso campo de golfe, projetado para desafiar e encantar jogadores de todos os níveis.</p>
+    </section>
+    <section id="associar" class="tab-content">
+        <h2>Associar-se</h2>
+        <p>Descubra os benefícios exclusivos para membros e torne-se parte da nossa comunidade apaixonada por golfe.</p>
+    </section>
+    <section id="tabela" class="tab-content">
+        <h2>Tabela de Green-fee</h2>
+        <p>Confira os valores atualizados para visitantes e aproveite nossas condições especiais em horários selecionados.</p>
+    </section>
+    <section id="contatos" class="tab-content">
+        <h2>Contatos</h2>
+        <p>Entre em contato conosco para reservas, eventos ou qualquer informação adicional. Estamos prontos para atendê-lo!</p>
+    </section>
     <script src="script.js"></script>
 </body>
 </html>

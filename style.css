@@ -1,14 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-:root {
-    --green: #2e8b57;
-    --dark: #064420;
-    --light: #f6fff6;
-}
-
-* {
-    box-sizing: border-box;
-}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -66,69 +55,69 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    padding: 20px;
 }
 
-#sobre img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.benefits {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+body.main-page {
+    display: block;
     padding: 0;
-    list-style: none;
 }
 
-.benefits li {
-    flex: 1 1 200px;
-    background: var(--green);
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://images.unsplash.com/photo-1501700493788-fa1a7233cd3a?auto=format&fit=crop&w=1350&q=80')
+            center/cover no-repeat;
     color: #fff;
-    padding: 1rem;
-    border-radius: 4px;
+    text-align: center;
+    padding: 100px 20px;
 }
 
-.fees-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.fees-table th,
-.fees-table td {
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-    text-align: left;
-}
-
-.forms {
-    display: grid;
+.tabs {
+    display: flex;
+    justify-content: center;
     gap: 1rem;
-    max-width: 400px;
-    margin-top: 1rem;
+    background-color: var(--primary-color);
 }
 
-.forms input,
-.forms textarea,
-.forms button {
-    padding: 0.5rem;
-    font-size: 1rem;
-}
-
-.forms button {
-    background: var(--green);
-    color: #fff;
+.tab {
+    background: none;
     border: none;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes fade {
+.tab:hover,
+.tab.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tab-content {
+    display: none;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
+}
+
+#campo {
+    border: 2px solid var(--primary-color);
+    background-color: var(--accent-color);
+    cursor: crosshair;
 }
