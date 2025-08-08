@@ -1,15 +1,134 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background-color: #e0ffe0;
-    margin: 0;
-    padding: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --green: #2e8b57;
+    --dark: #064420;
+    --light: #f6fff6;
 }
 
-#campo {
-    border: 2px solid #006400;
-    background-color: #90ee90;
-    cursor: crosshair;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+header.hero {
+    background: url('https://images.unsplash.com/photo-1501700493788-fa1a7233cd3a?auto=format&fit=crop&w=1350&q=80')
+        center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 6rem 1rem;
+}
+
+nav.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: var(--dark);
+}
+
+.tab {
+    padding: 1rem 2rem;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 1rem;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.tab-content {
+    display: none;
+    animation: fade 0.5s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#sobre {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    align-items: center;
+}
+
+#sobre img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.benefits li {
+    flex: 1 1 200px;
+    background: var(--green);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.fees-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fees-table th,
+.fees-table td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.forms {
+    display: grid;
+    gap: 1rem;
+    max-width: 400px;
+    margin-top: 1rem;
+}
+
+.forms input,
+.forms textarea,
+.forms button {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.forms button {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
