@@ -1,12 +1,59 @@
-:root {
-    --primary-color: #006400;
-    --accent-color: #90ee90;
-    --light-bg: #f4fff4;
-}
 
 body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+header.hero {
+    background: url('https://images.unsplash.com/photo-1501700493788-fa1a7233cd3a?auto=format&fit=crop&w=1350&q=80')
+        center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 6rem 1rem;
+}
+
+nav.tabs {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    background-color: var(--dark);
+}
+
+.tab {
+    padding: 1rem 2rem;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 1rem;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.tab-content {
+    display: none;
+    animation: fade 0.5s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#sobre {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--light-bg);
