@@ -1,11 +1,20 @@
 // MUDANÇA CRÍTICA: Envolvemos todo o código no evento 'load'.
 // Isso garante que o script só rode depois que TUDO na página (imagens, fontes, etc.) estiver 100% carregado.
 window.addEventListener("load", () => {
+  // Se as bibliotecas externas não carregarem, removemos o preloader
+  // e mostramos o título principal para evitar tela totalmente preta.
+  const preloader = document.getElementById("preloader");
+  if (typeof gsap === "undefined") {
+    if (preloader) preloader.style.display = "none";
+    const fallbackTitle = document.querySelector(".hero-title");
+    if (fallbackTitle) fallbackTitle.style.opacity = 1;
+    return;
+  }
+
   gsap.registerPlugin(ScrollTrigger);
 
   // --- PRELOADER ---
   // Esta parte já estava no lugar certo, mas agora faz parte do bloco principal.
-  const preloader = document.getElementById("preloader");
   if (preloader) {
     const word = preloader.querySelector("h1");
     const letters = word.textContent.split("");
