@@ -1,233 +1,188 @@
 import gsap from 'gsap';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import ScrollTo from 'gsap/ScrollToPlugin';
 import * as THREE from 'three';
 import lottie from 'lottie-web';
 
-// Registrar o plugin ScrollTrigger do GSAP
-gsap.registerPlugin(ScrollTrigger);
+// --- INICIALIZAÇÃO GERAL ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Registra os plugins do GSAP
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// --- LÓGICA DO CURSOR ---
-const cursor = document.querySelector('.cursor');
-window.addEventListener('mousemove', (e) => {
-    gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.2,
-        ease: 'power2.out'
-    });
-});
-document.querySelectorAll('a, button, .menu-toggle').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        gsap.to(cursor, {
-            width: 50,
-            height: 50,
-            backgroundColor: 'rgba(192, 160, 98, 0.3)',
-            borderWidth: '0px',
-            duration: 0.3
-        });
-    });
-    el.addEventListener('mouseleave', () => {
-        gsap.to(cursor, {
-            width: 25,
-            height: 25,
-            backgroundColor: 'transparent',
-            borderWidth: '1px',
-            duration: 0.3
-        });
-    });
+    // Funções de inicialização modulares
+    initPreloader();
+    initCursor();
+    initMenu();
+    initHeroScene();
+    initLottieAnimation();
+    initInteractiveScene(); // Inicializa a cena interativa também
+    // As animações de scroll serão chamadas ao final do preloader
 });
 
-const mainContent = document.querySelector('#main-content');
+// --- MÓDULO: PRELOADER E ENTRADA DO SITE ---
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    const mainContent = document.getElementById('main-content');
+    if (!preloader || !mainContent) return;
 
-/* --- INÍCIO DA SUBSTITUIÇÃO: LÓGICA DO MENU --- */
-const menuToggle = document.querySelector('.menu-toggle');
-const navOverlay = document.querySelector('.nav-overlay');
-const navLinks = gsap.utils.toArray('.nav-link'); // Converte para um array GSAP
-
-menuToggle.addEventListener('click', () => {
-    const isActive = menuToggle.classList.toggle('active');
-    navOverlay.classList.toggle('active', isActive);
-
-    if (isActive) {
-        // Animação de entrada dos links
-        gsap.to(navLinks, {
-            opacity: 1,
-            y: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: 0.4 // Espera a transição do overlay começar
-        });
-    } else {
-        // Esconde os links imediatamente ao fechar
-        gsap.set(navLinks, { opacity: 0, y: 30 });
-    }
-});
-
-// Fecha o menu e rola suavemente ao clicar em um link
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        menuToggle.classList.remove('active');
-        navOverlay.classList.remove('active');
-        gsap.set(navLinks, { opacity: 0, y: 30 });
-
-        const targetId = link.getAttribute('href');
-        gsap.to(window, {
-            duration: 1.5,
-            scrollTo: targetId,
-            ease: 'power2.inOut'
-        });
-    });
-});
-
-// Adiciona o plugin ScrollTo ao GSAP
-gsap.registerPlugin(ScrollTo);
-/* --- FIM DA SUBSTITUIÇÃO: LÓGICA DO MENU --- */
-
-/* --- INÍCIO DA SUBSTITUIÇÃO: ANIMAÇÃO DE ENTRADA --- */
-const tlPreloader = gsap.timeline({
-    onComplete: () => {
-        document.querySelector('#preloader').style.display = 'none';
-        
-        // Sequência de entrada do site principal
-        const tlIntro = gsap.timeline();
-        tlIntro
-            .to(mainContent, { opacity: 1, duration: 0.1 })
-            .from('.menu-toggle', { y: -100, opacity: 0, duration: 1, ease: 'power3.out' })
-            .add(animateHero); // Inicia a animação do HERO
-    }
-});
-
-tlPreloader
-    .from('#preloader-text', { y: 100, opacity: 0, duration: 1.5, ease: 'expo.out' })
-    .to('#preloader', { opacity: 0, duration: 1, delay: 0.5 });
-
-// O main-content começa invisível para uma transição suave
-gsap.set(mainContent, { opacity: 0 });
-/* --- FIM DA SUBSTITUIÇÃO: ANIMAÇÃO DE ENTRADA --- */
-
-// --- ANIMAÇÕES CONTROLADAS POR SCROLL (SCROLLTRIGGER) ---
-function initScrollAnimations() {
-    // Animação de desenho da linha SVG
-    gsap.to("#tracado-svg path", {
-        strokeDashoffset: 0,
-        scrollTrigger: {
-            trigger: "#o-tracado",
-            start: "top center",
-            end: "bottom center",
-            scrub: true,
-        },
-    });
-
-    // Fade in genérico para seções
-    document.querySelectorAll('section').forEach(section => {
-        gsap.from(section.querySelectorAll('h2, p, button'), {
-            opacity: 0,
-            y: 50,
-            stagger: 0.2,
-            duration: 1,
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-            }
-        });
-    });
-
-    // Efeito de revelação e "zoom out" para a imagem do clubhouse
-    gsap.fromTo(".clubhouse-image img", 
-        { scale: 1.4 }, 
-        {
-            scale: 1,
-            scrollTrigger: {
-                trigger: "#clubhouse",
-                start: "top 80%",
-                end: "bottom top",
-                scrub: true
-            }
-        }
-    );
+    const tl = gsap.timeline();
+    tl.from('#preloader-text', { y: 80, opacity: 0, duration: 1.5, ease: 'expo.out' })
+      .to(preloader, {
+          opacity: 0,
+          duration: 1,
+          delay: 0.5,
+          onComplete: () => {
+              preloader.style.display = 'none';
+              mainContent.style.visibility = 'visible';
+              gsap.from(mainContent, { opacity: 0, duration: 1 });
+              // Inicia as animações de scroll APÓS tudo estar visível
+              initScrollAnimations();
+          }
+      });
 }
 
-// --- ANIMAÇÃO LOTTIE ---
-lottie.loadAnimation({
-    container: document.getElementById('lottie-animation'),
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
-    path: 'https://assets5.lottiefiles.com/packages/lf20_Vpsd6M.json' // URL de um placeholder de animação de swing
-});
+// --- MÓDULO: CURSOR CUSTOMIZADO ---
+function initCursor() {
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
+    window.addEventListener('mousemove', e => {
+        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.2, ease: 'power2.out' });
+    });
+    document.querySelectorAll('a, button, #menu-toggle').forEach(el => {
+        el.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 2, backgroundColor: 'rgba(192, 160, 98, 0.3)', duration: 0.3 }));
+        el.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, backgroundColor: 'transparent', duration: 0.3 }));
+    });
+}
 
-document.querySelector('.column-lottie').addEventListener('mouseenter', () => {
-    lottie.play();
-});
-document.querySelector('.column-lottie').addEventListener('mouseleave', () => {
-    lottie.stop();
-});
+// --- MÓDULO: MENU DE NAVEGAÇÃO ---
+function initMenu() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navOverlay = document.getElementById('nav-overlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (!menuToggle || !navOverlay) return;
 
-// --- ANIMAÇÃO THREE.JS (HERO) ---
-let camera, scene, renderer;
-let heroAnimationStarted = false;
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+    });
 
-function initHero3D() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#bg-3d'), antialias: true });
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            if (menuToggle.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                navOverlay.classList.remove('active');
+            }
+            gsap.to(window, { duration: 1.5, scrollTo: link.getAttribute('href'), ease: 'power2.inOut' });
+        });
+    });
+}
+
+// --- MÓDULO: ANIMAÇÃO DA CENA HERO (COM PLACEHOLDER) ---
+function initHeroScene() {
+    const canvas = document.getElementById('hero-canvas-3d');
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Luzes
+    // PLACEHOLDER 3D: um Icosaedro giratório. Garante que a cena funcione.
+    // SUBSTITUA ESTA PARTE QUANDO TIVER SEU MODELO .GLB
+    const geometry = new THREE.IcosahedronGeometry(1.5, 0);
+    const material = new THREE.MeshStandardMaterial({ color: 0xC0A062, flatShading: true });
+    const placeholderMesh = new THREE.Mesh(geometry, material);
+    scene.add(placeholderMesh);
+
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(5, 10, 7);
-    scene.add(directionalLight);
-
-    // Carregador de Textura e Fundo
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load(
-        'https://images.unsplash.com/photo-1500932382259-518b829622d1?q=80&w=2072&auto=format&fit=crop',
-        () => {
-            const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
-            rt.fromEquirectangularTexture(renderer, texture);
-            scene.background = rt.texture;
-        }
-    );
-    
+    const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
     camera.position.z = 5;
-}
 
-function animateHero() {
-    if(heroAnimationStarted) return;
-    heroAnimationStarted = true;
-
-    // Timeline de animação da câmera e texto
-    const tlHero = gsap.timeline();
-    tlHero.from(camera.position, {
-        z: 15,
-        y: 2,
-        duration: 3,
-        ease: 'power3.inOut'
-    }).from('#hero-title', {
-        opacity: 0,
-        y: 50,
-        duration: 1.5,
-        ease: 'power3.out'
-    }, "-=1");
-
-    function animate() {
+    const animate = () => {
         requestAnimationFrame(animate);
+        placeholderMesh.rotation.x += 0.001;
+        placeholderMesh.rotation.y += 0.001;
         renderer.render(scene, camera);
-    }
+    };
     animate();
-    initScrollAnimations(); // Inicia as animações de scroll depois que o hero está pronto
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
 }
 
-initHero3D(); // Inicia a cena 3D, mas a animação espera o preloader
+// --- MÓDULO: ANIMAÇÃO LOTTIE ---
+function initLottieAnimation() {
+    const container = document.getElementById('lottie-animation-container');
+    if (!container) return;
+    lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true, // Deixamos autoplay para garantir que está funcionando
+        path: 'https://assets5.lottiefiles.com/packages/lf20_Vpsd6M.json'
+    });
+}
 
-// Lida com o redimensionamento da janela
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
+// --- MÓDULO: CENA 3D INTERATIVA (COM PLACEHOLDER) ---
+function initInteractiveScene() {
+    const canvas = document.getElementById('interactive-canvas-3d');
+    if (!canvas) return;
+    // Semelhante ao Hero, mas com controle do mouse que será adicionado depois.
+    // Por enquanto, apenas renderiza uma cena para garantir que funciona.
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+    const geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
+    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1 });
+    const placeholderMesh = new THREE.Mesh(geometry, material);
+    scene.add(placeholderMesh);
+    
+    const light = new THREE.DirectionalLight(0xffffff, 2);
+    light.position.set(1, 1, 1);
+    scene.add(light);
+    camera.position.z = 5;
+
+    const animate = () => {
+        requestAnimationFrame(animate);
+        placeholderMesh.rotation.y += 0.005;
+        renderer.render(scene, camera);
+    };
+    animate();
+}
+
+// --- MÓDULO: ANIMAÇÕES DE SCROLL ---
+function initScrollAnimations() {
+    // Animação de entrada dos títulos das seções
+    gsap.utils.toArray('h2, .section-content p').forEach(elem => {
+        gsap.from(elem, {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: elem,
+                start: 'top 90%',
+            }
+        });
+    });
+
+    // Animação da imagem do Clubhouse
+    const clubhouseImg = document.querySelector('.clubhouse-image-wrapper img');
+    if(clubhouseImg) {
+        gsap.from(clubhouseImg, {
+            scale: 1.2,
+            scrollTrigger: {
+                trigger: '.clubhouse-image-wrapper',
+                scrub: true
+            }
+        });
+    }
+}
