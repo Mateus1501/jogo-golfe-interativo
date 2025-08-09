@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import ScrollTo from 'gsap/ScrollToPlugin';
 import * as THREE from 'three';
 import lottie from 'lottie-web';
 
@@ -37,66 +38,75 @@ document.querySelectorAll('a, button, .menu-toggle').forEach(el => {
     });
 });
 
-// --- LÓGICA DO MENU DE NAVEGAÇÃO ---
-const menuToggle = document.querySelector('.menu-toggle');
-const navOverlay = document.querySelector('.nav-overlay');
-const navLinks = document.querySelectorAll('.nav-link');
 const mainContent = document.querySelector('#main-content');
 
-let menuOpen = false;
-const tlMenu = gsap.timeline({ paused: true });
-
-tlMenu.to(navOverlay, {
-    transform: 'translateY(0)',
-    duration: 0.8,
-    ease: 'expo.inOut'
-}).to(navLinks, {
-    opacity: 1,
-    y: 0,
-    stagger: 0.1,
-    duration: 0.5,
-    ease: 'power2.out'
-}, "-=0.5");
+/* --- INÍCIO DA SUBSTITUIÇÃO: LÓGICA DO MENU --- */
+const menuToggle = document.querySelector('.menu-toggle');
+const navOverlay = document.querySelector('.nav-overlay');
+const navLinks = gsap.utils.toArray('.nav-link'); // Converte para um array GSAP
 
 menuToggle.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    menuToggle.classList.toggle('active');
-    
-    if (menuOpen) {
-        tlMenu.play();
+    const isActive = menuToggle.classList.toggle('active');
+    navOverlay.classList.toggle('active', isActive);
+
+    if (isActive) {
+        // Animação de entrada dos links
+        gsap.to(navLinks, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: 0.4 // Espera a transição do overlay começar
+        });
     } else {
-        tlMenu.reverse();
+        // Esconde os links imediatamente ao fechar
+        gsap.set(navLinks, { opacity: 0, y: 30 });
     }
 });
 
+// Fecha o menu e rola suavemente ao clicar em um link
 navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        menuOpen = false;
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
         menuToggle.classList.remove('active');
-        tlMenu.reverse();
-        // Lógica de smooth scroll
-        const target = document.querySelector(link.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth' });
+        navOverlay.classList.remove('active');
+        gsap.set(navLinks, { opacity: 0, y: 30 });
+
+        const targetId = link.getAttribute('href');
+        gsap.to(window, {
+            duration: 1.5,
+            scrollTo: targetId,
+            ease: 'power2.inOut'
+        });
     });
 });
 
-// --- ANIMAÇÃO DO PRELOADER ---
-const preloaderText = document.querySelector('#preloader-text');
-const tlPreloader = gsap.timeline();
-tlPreloader.from(preloaderText, {
-    y: 100,
-    opacity: 0,
-    duration: 1.5,
-    ease: 'expo.out'
-}).to('#preloader', {
-    opacity: 0,
-    duration: 1,
+// Adiciona o plugin ScrollTo ao GSAP
+gsap.registerPlugin(ScrollTo);
+/* --- FIM DA SUBSTITUIÇÃO: LÓGICA DO MENU --- */
+
+/* --- INÍCIO DA SUBSTITUIÇÃO: ANIMAÇÃO DE ENTRADA --- */
+const tlPreloader = gsap.timeline({
     onComplete: () => {
         document.querySelector('#preloader').style.display = 'none';
-        // Inicia a animação do HERO somente após o preloader
-        animateHero();
+        
+        // Sequência de entrada do site principal
+        const tlIntro = gsap.timeline();
+        tlIntro
+            .to(mainContent, { opacity: 1, duration: 0.1 })
+            .from('.menu-toggle', { y: -100, opacity: 0, duration: 1, ease: 'power3.out' })
+            .add(animateHero); // Inicia a animação do HERO
     }
 });
+
+tlPreloader
+    .from('#preloader-text', { y: 100, opacity: 0, duration: 1.5, ease: 'expo.out' })
+    .to('#preloader', { opacity: 0, duration: 1, delay: 0.5 });
+
+// O main-content começa invisível para uma transição suave
+gsap.set(mainContent, { opacity: 0 });
+/* --- FIM DA SUBSTITUIÇÃO: ANIMAÇÃO DE ENTRADA --- */
 
 // --- ANIMAÇÕES CONTROLADAS POR SCROLL (SCROLLTRIGGER) ---
 function initScrollAnimations() {
@@ -124,6 +134,20 @@ function initScrollAnimations() {
             }
         });
     });
+
+    // Efeito de revelação e "zoom out" para a imagem do clubhouse
+    gsap.fromTo(".clubhouse-image img", 
+        { scale: 1.4 }, 
+        {
+            scale: 1,
+            scrollTrigger: {
+                trigger: "#clubhouse",
+                start: "top 80%",
+                end: "bottom top",
+                scrub: true
+            }
+        }
+    );
 }
 
 // --- ANIMAÇÃO LOTTIE ---
