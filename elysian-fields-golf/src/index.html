@@ -15,34 +15,34 @@
         <h1 id="preloader-text">ELYSIAN FIELDS</h1>
     </div>
 
-    <div class="cursor"></div>
+    <div id="custom-cursor"></div>
 
-    <div class="menu-toggle">
+    <button id="menu-toggle" aria-label="Abrir menu de navegação">
         <div class="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
-    </div>
+    </button>
 
-    <nav class="nav-overlay">
+    <nav id="nav-overlay">
         <div class="nav-links">
             <a href="#hero" class="nav-link">Início</a>
             <a href="#o-tracado" class="nav-link">O Traçado</a>
             <a href="#sua-tacada" class="nav-link">Sua Tacada</a>
+            <a href="#clubhouse" class="nav-link">Clubhouse</a>
             <a href="#experiencia-3d" class="nav-link">Explore o Campo</a>
             <a href="#contato" class="nav-link">Contato</a>
         </div>
-
-        <a href="#clubhouse" class="nav-link">Clubhouse</a>
     </nav>
 
     <main id="main-content">
+        
         <section id="hero">
             <div id="hero-text-container">
                 <h1 id="hero-title">A Arte do Golfe, Redefinida.</h1>
             </div>
-            <canvas id="bg-3d"></canvas>
+            <canvas id="hero-canvas-3d"></canvas>
         </section>
 
         <section id="o-tracado">
@@ -50,9 +50,7 @@
                 <h2>O Traçado Perfeito</h2>
                 <p>Cada buraco foi meticulosamente desenhado para harmonizar desafio e beleza natural.</p>
             </div>
-            <div class="tracado-visual">
-                <svg id="tracado-svg" width="100%" height="100%" viewBox="0 0 1600 900"></svg>
-            </div>
+            <div id="tracado-svg-container"></div>
         </section>
         
         <section id="sua-tacada">
@@ -62,13 +60,8 @@
                 <button class="cta-button">Agende uma Aula</button>
             </div>
             <div class="column-lottie">
-                <div id="lottie-animation"></div>
+                <div id="lottie-animation-container"></div>
             </div>
-        </section>
-
-        <section id="experiencia-3d">
-            <h2>Explore nosso Buraco Assinatura em 3D</h2>
-            <canvas id="interactive-hole"></canvas>
         </section>
 
         <section id="clubhouse">
@@ -76,16 +69,25 @@
                 <h2>Nosso Clubhouse</h2>
                 <p>Um oásis de conforto e elegância. Desfrute de nossa gastronomia premiada ou relaxe com uma vista espetacular do campo após sua partida.</p>
             </div>
-            <div class="clubhouse-image">
+            <div class="clubhouse-image-wrapper">
                 <img src="https://images.unsplash.com/photo-1622395859842-9c4c7e2b7e9f?q=80&w=1964&auto=format&fit=crop" alt="Interior luxuoso do clubhouse do campo de golfe">
             </div>
+        </section>
+
+        <section id="experiencia-3d">
+            <h2>Explore nosso Buraco Assinatura</h2>
+            <p>Use o mouse para girar e ver cada detalhe.</p>
+            <canvas id="interactive-canvas-3d"></canvas>
         </section>
 
         <footer id="contato">
              <h3>Entre em Contato</h3>
              <p>contato@elysianfields.golf | +55 24 99999-9999</p>
              <div class="social-links">
-                </div>
+                <a href="#" aria-label="Facebook">
+                    <svg fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"/></svg>
+                </a>
+             </div>
              <p class="copyright">&copy; 2025 Elysian Fields Golf Club. Todos os direitos reservados.</p>
         </footer>
 
