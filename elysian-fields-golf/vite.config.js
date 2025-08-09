@@ -2,9 +2,12 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: 'src', // A raiz do nosso desenvolvimento é a pasta 'src'
+  // IMPORTANTE: Adiciona a base do repositório para o deploy no GitHub Pages
+  base: '/jogo-golfe-interativo/', 
+  
+  root: 'src', 
   build: {
-    outDir: '../dist', // Onde os arquivos de produção serão gerados
+    outDir: '../dist',
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/index.html'),
@@ -12,6 +15,6 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000, // Define a porta para o servidor de desenvolvimento
+    port: 3000,
   },
 });
