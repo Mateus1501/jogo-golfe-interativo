@@ -1,0 +1,232 @@
+/* RESET E CONFIGURAÇÕES GLOBAIS */
+:root {
+    --bg-color: #111111;
+    --text-color: #EAEAEA;
+    --gold-color: #C0A062;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    cursor: none; /* Esconde o cursor padrão */
+    overflow-x: hidden;
+}
+
+main {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* CURSOR CUSTOMIZADO */
+.cursor {
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--gold-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+}
+
+/* ESTILOS DE SEÇÃO */
+section {
+    padding: 100px 5%;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--gold-color);
+    margin-bottom: 20px;
+}
+
+/* PRELOADER */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+#preloader-text {
+    font-size: 4vw;
+    font-weight: 700;
+    color: var(--gold-color);
+    overflow: hidden;
+}
+
+/* MENU DE NAVEGAÇÃO */
+.menu-toggle {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: none;
+}
+.hamburger {
+    width: 25px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.hamburger span {
+    width: 100%;
+    height: 2px;
+    background: var(--gold-color);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animação do Hambúrguer para 'X' */
+.menu-toggle.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+.menu-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.nav-overlay.active {
+    transform: translateY(0);
+}
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.nav-link {
+    font-size: 4vw;
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 15px 0;
+    opacity: 0; /* Começa invisível para animar com JS */
+    transform: translateY(20px);
+}
+
+/* SEÇÃO HERO */
+#hero {
+    min-height: 100vh;
+    padding: 0;
+    overflow: hidden;
+}
+#hero-text-container {
+    position: absolute;
+    z-index: 10;
+}
+#hero-title {
+    font-size: 6vw;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+#bg-3d {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* SEÇÃO O TRAÇADO */
+#o-tracado {
+    background-image: url('https://images.unsplash.com/photo-1587130983999-56d11bff6338?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efeito Parallax */
+}
+.tracado-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#tracado-svg path {
+    stroke-width: 4;
+    stroke: var(--gold-color);
+    fill: none;
+    stroke-dasharray: 1000; /* Um valor grande */
+    stroke-dashoffset: 1000; /* Começa invisível */
+}
+
+/* SEÇÃO SUA TACADA */
+#sua-tacada {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.column-text, .column-lottie {
+    width: 45%;
+    text-align: left;
+}
+#lottie-animation {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.cta-button {
+    background: var(--gold-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: none;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+/* SEÇÃO 3D INTERATIVA E FOOTER */
+#experiencia-3d, footer#contato {
+    background-color: #0c0c0c;
+}
+
+footer#contato {
+    min-height: auto;
+    padding: 60px 5%;
+}
