@@ -45,6 +45,8 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
+  color: white; /* Garante a cor branca no título do Hero */
+  z-index: 10;
 }
 #bg-3d {
   width: 100%;
@@ -105,7 +107,7 @@ button {
   border: none;
   padding: 10px 20px;
   font-weight: 600;
-  cursor: pointer;
+  cursor: none; /* Alterado para none para funcionar com o cursor customizado */
 }
 #experiencia-3d {
   position: relative;
