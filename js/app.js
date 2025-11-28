@@ -71,12 +71,17 @@ window.addEventListener("load", () => {
 
     const loader = new THREE.GLTFLoader();
     // AVISO: Certifique-se que o caminho 'models/signature-hole.glb' está correto!
-    loader.load("models/signature-hole.glb", (gltf) => {
-      scene.add(gltf.scene);
-      render();
-    }, undefined, (error) => {
-      console.error("Erro ao carregar o modelo 3D do Hero:", error);
-    });
+    loader.load(
+      "models/signature-hole.glb",
+      (gltf) => {
+        scene.add(gltf.scene);
+        render();
+      },
+      undefined,
+      (error) => {
+        console.error("Erro ao carregar o modelo 3D do Hero:", error);
+      },
+    );
 
     function render() {
       renderer.render(scene, camera);
@@ -126,6 +131,32 @@ window.addEventListener("load", () => {
       onUpdate: render,
     });
   }
+
+  // --- ANIMAÇÕES DO TOPO E CARTÕES ---
+  const topbar = document.querySelector(".topbar");
+  if (topbar) {
+    ScrollTrigger.create({
+      start: "top -20",
+      end: 99999,
+      onUpdate: (self) => {
+        const opa = Math.min(1, self.progress * 2);
+        topbar.style.background = `rgba(15, 15, 15, ${0.85 * opa})`;
+        topbar.style.borderBottomColor = `rgba(192, 160, 98, ${0.08 * opa})`;
+      },
+    });
+  }
+  gsap.utils.toArray(".card, .slot").forEach((el) => {
+    gsap.from(el, {
+      y: 40,
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+      },
+    });
+  });
 
   // --- ANIMAÇÕES 'O TRACADO' ---
   gsap.to("#tracado-path", {
@@ -190,11 +221,16 @@ window.addEventListener("load", () => {
 
     const loader2 = new THREE.GLTFLoader();
     // AVISO: Certifique-se que o caminho 'models/signature-hole.glb' está correto!
-    loader2.load("models/signature-hole.glb", (gltf) => {
-      scene2.add(gltf.scene.clone());
-    }, undefined, (error) => {
-      console.error("Erro ao carregar o modelo 3D interativo:", error);
-    });
+    loader2.load(
+      "models/signature-hole.glb",
+      (gltf) => {
+        scene2.add(gltf.scene.clone());
+      },
+      undefined,
+      (error) => {
+        console.error("Erro ao carregar o modelo 3D interativo:", error);
+      },
+    );
 
     function animateInteractive() {
       requestAnimationFrame(animateInteractive);
@@ -214,4 +250,3 @@ window.addEventListener("load", () => {
     );
   });
 });
-

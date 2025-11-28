@@ -23,13 +23,72 @@
   <body>
     <div id="preloader"><h1>ELYSIAN FIELDS</h1></div>
 
+    <header class="topbar">
+      <div class="brand">Elysian Fields</div>
+      <nav>
+        <a href="#o-tracado">Traçado</a>
+        <a href="#sua-tacada">Academia</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#experiencia-3d">Buraco 3D</a>
+      </nav>
+      <button class="ghost">Quero jogar</button>
+    </header>
+
     <section id="hero">
       <canvas id="bg-3d"></canvas>
-      <h1 class="hero-title">A Arte do Golfe, Redefinida</h1>
+      <div class="hero-content">
+        <h1 class="hero-title">A Arte do Golfe, Redefinida</h1>
+        <p>
+          Um retiro rodeado por pinheiros, lagos espelhados e um traçado que
+          desafia campeões. Reserve sua saída e viva o ritmo sereno do Elysian
+          Fields Golf Club.
+        </p>
+        <div class="hero-ctas">
+          <button>Reservar Tee Time</button>
+          <button class="ghost">Seja Sócio</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="destaques" class="panel">
+      <div class="panel-header">
+        <h2>Um Clube Pensado para Jogadores Exigentes</h2>
+        <p>
+          Greens firmes, fairways largos e vento costeiro criam um jogo
+          estratégico em qualquer estação.
+        </p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon"><i class="fa-solid fa-flag-checkered"></i></div>
+          <h3>18 buracos par 72</h3>
+          <p>Projeto contemporâneo com bunkers esculpidos e ondulações suaves.</p>
+        </article>
+        <article class="card">
+          <div class="icon"><i class="fa-solid fa-wind"></i></div>
+          <h3>Microclima perfeito</h3>
+          <p>
+            Brisa constante, gramados Bermuda sempre verdes e drenagem rápida
+            para jogo após chuvas.
+          </p>
+        </article>
+        <article class="card">
+          <div class="icon"><i class="fa-solid fa-trophy"></i></div>
+          <h3>Eventos exclusivos</h3>
+          <p>
+            Pro-ams intimistas, clinics com tour players e experiências
+            gastronômicas na casa club.
+          </p>
+        </article>
+      </div>
     </section>
 
     <section id="o-tracado">
       <h2>O Traçado Perfeito</h2>
+      <p class="lede">
+        Conduza o drive ao platô, mire no pin protegido pela água e sinta a
+        tensão da queda de 12 metros até o green.
+      </p>
       <div class="map">
         <img src="images/course-overview.jpg" alt="Mapa do Campo" />
         <svg viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -46,11 +105,64 @@
         <h2>Sua Tacada</h2>
         <p>
           Descubra nossa academia de golfe e aperfeiçoe seu swing com
-          profissionais experientes.
+          profissionais experientes. Aulas individuais, análises em vídeo e
+          sessões em simulador compõem o programa.
         </p>
+        <div class="pill-row">
+          <span class="pill">TrackMan Bay</span>
+          <span class="pill">Putting Lab</span>
+          <span class="pill">Custom Fitting</span>
+        </div>
         <button>Agende uma Aula</button>
       </div>
       <div id="lottie-animation"></div>
+    </section>
+
+    <section id="agenda" class="panel">
+      <div class="panel-header">
+        <h2>Próximas saídas & experiências</h2>
+        <p>
+          Escolha seu horário favorito ou participe de um dos formatos
+          especiais do clube.
+        </p>
+      </div>
+      <div class="grid">
+        <article class="slot">
+          <div class="slot-meta">Tee time premium</div>
+          <h3>06h40 - Sunrise Walk</h3>
+          <p>Fairways iluminados pela neblina, partida acompanhada por caddie.</p>
+          <button class="ghost">Reservar</button>
+        </article>
+        <article class="slot">
+          <div class="slot-meta">Clínica</div>
+          <h3>11h00 - Wedge Mastery</h3>
+          <p>90 minutos focados em distância controlada e controle de rotação.</p>
+          <button class="ghost">Inscrever</button>
+        </article>
+        <article class="slot">
+          <div class="slot-meta">Torneio</div>
+          <h3>Sábado - Stableford</h3>
+          <p>Field limitado a 64 jogadores, premiação gourmet e coquetel final.</p>
+          <button class="ghost">Garantir vaga</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="clubhouse">
+      <div class="image" role="presentation"></div>
+      <div class="content">
+        <h2>Clubhouse com alma contemporânea</h2>
+        <p>
+          Salão envidraçado, adega climática, menu assinado por chef convidado e
+          terraço para acompanhar o pôr do sol sobre o 18º green.
+        </p>
+        <ul>
+          <li>Lounge com lareira, bar de assinatura e cigar room.</li>
+          <li>Spa para pós-jogo, vestiários com enxoval premium.</li>
+          <li>Pro shop com curadoria internacional e workshops sazonais.</li>
+        </ul>
+        <button>Conhecer espaços</button>
+      </div>
     </section>
 
     <section id="experiencia-3d">
@@ -59,12 +171,23 @@
     </section>
 
     <footer>
-      <div class="socials">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
+      <div class="footer-grid">
+        <div>
+          <p class="brand">Elysian Fields Golf Club</p>
+          <p class="muted">Costa Norte · Par 72 · 7.140 jardas</p>
+        </div>
+        <div>
+          <p class="muted">Reservas</p>
+          <a href="mailto:reservas@elysianfields.com">reservas@elysianfields.com</a>
+          <p class="muted">+55 21 5555-0101</p>
+        </div>
+        <div class="socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
       </div>
-      <p>© 2025 Elysian Fields Golf Club</p>
+      <p class="copyright">© 2025 Elysian Fields Golf Club</p>
     </footer>
 
     <div class="cursor"></div>
