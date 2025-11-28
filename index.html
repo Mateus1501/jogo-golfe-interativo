@@ -5,192 +5,576 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elysian Fields Golf Club</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SzlrxWriC3LL1z+e8AVF0TJYaUBP3pCq+6bq3qk6bGfmC3z7W9JR54aRDUqLz6JDf0e2X49WfT8dLkz7Y5x0Ug=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="preloader"><h1>ELYSIAN FIELDS</h1></div>
-
     <header class="topbar">
-      <div class="brand">Elysian Fields</div>
-      <nav>
-        <a href="#o-tracado">Traçado</a>
-        <a href="#sua-tacada">Academia</a>
-        <a href="#agenda">Agenda</a>
-        <a href="#experiencia-3d">Buraco 3D</a>
+      <div class="brand">
+        <span class="brand-mark">EF</span>
+        <div>
+          <p class="brand-title">Elysian Fields</p>
+          <p class="brand-sub">Golf &amp; Country Club</p>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#campo">O Campo</a>
+        <a href="#tee-time">Tee Time</a>
+        <a href="#planos">Planos</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#contato">Contato</a>
       </nav>
-      <button class="ghost">Quero jogar</button>
+      <div class="topbar-actions">
+        <a class="link" href="#associacao">Seja Sócio</a>
+        <a class="btn primary" href="#tee-time">Reservar Tee Time</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
     </header>
 
-    <section id="hero">
-      <canvas id="bg-3d"></canvas>
-      <div class="hero-content">
-        <h1 class="hero-title">A Arte do Golfe, Redefinida</h1>
-        <p>
-          Um retiro rodeado por pinheiros, lagos espelhados e um traçado que
-          desafia campeões. Reserve sua saída e viva o ritmo sereno do Elysian
-          Fields Golf Club.
-        </p>
-        <div class="hero-ctas">
-          <button>Reservar Tee Time</button>
-          <button class="ghost">Seja Sócio</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="destaques" class="panel">
-      <div class="panel-header">
-        <h2>Um Clube Pensado para Jogadores Exigentes</h2>
-        <p>
-          Greens firmes, fairways largos e vento costeiro criam um jogo
-          estratégico em qualquer estação.
-        </p>
-      </div>
-      <div class="cards">
-        <article class="card">
-          <div class="icon"><i class="fa-solid fa-flag-checkered"></i></div>
-          <h3>18 buracos par 72</h3>
-          <p>Projeto contemporâneo com bunkers esculpidos e ondulações suaves.</p>
-        </article>
-        <article class="card">
-          <div class="icon"><i class="fa-solid fa-wind"></i></div>
-          <h3>Microclima perfeito</h3>
-          <p>
-            Brisa constante, gramados Bermuda sempre verdes e drenagem rápida
-            para jogo após chuvas.
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Costa Norte · Par 72 · 7.140 jardas</p>
+          <h1>Golf de classe internacional em um refúgio costeiro.</h1>
+          <p class="lead">
+            Fairways moldados pelo vento, greens impecáveis e uma estrutura completa
+            para quem valoriza precisão, conforto e hospitalidade.
           </p>
-        </article>
-        <article class="card">
-          <div class="icon"><i class="fa-solid fa-trophy"></i></div>
-          <h3>Eventos exclusivos</h3>
-          <p>
-            Pro-ams intimistas, clinics com tour players e experiências
-            gastronômicas na casa club.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="o-tracado">
-      <h2>O Traçado Perfeito</h2>
-      <p class="lede">
-        Conduza o drive ao platô, mire no pin protegido pela água e sinta a
-        tensão da queda de 12 metros até o green.
-      </p>
-      <div class="map">
-        <img src="images/course-overview.jpg" alt="Mapa do Campo" />
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path id="tracado-path" d="M10 90 Q40 10 70 70 T90 10" />
-          <circle class="marker" cx="10" cy="90" r="2" />
-          <circle class="marker" cx="70" cy="70" r="2" />
-          <circle class="marker" cx="90" cy="10" r="2" />
-        </svg>
-      </div>
-    </section>
-
-    <section id="sua-tacada">
-      <div class="texto">
-        <h2>Sua Tacada</h2>
-        <p>
-          Descubra nossa academia de golfe e aperfeiçoe seu swing com
-          profissionais experientes. Aulas individuais, análises em vídeo e
-          sessões em simulador compõem o programa.
-        </p>
-        <div class="pill-row">
-          <span class="pill">TrackMan Bay</span>
-          <span class="pill">Putting Lab</span>
-          <span class="pill">Custom Fitting</span>
+          <div class="hero-actions">
+            <a class="btn primary" href="#tee-time">Reservar Tee Time</a>
+            <a class="btn ghost" href="#associacao">Torne-se membro</a>
+          </div>
+          <div class="hero-badges" aria-label="Principais diferenciais">
+            <span><i class="fa-solid fa-leaf"></i> Gramados Bermuda</span>
+            <span><i class="fa-solid fa-flag"></i> 18 buracos par 72</span>
+            <span><i class="fa-solid fa-champagne-glasses"></i> Hospitalidade premium</span>
+          </div>
         </div>
-        <button>Agende uma Aula</button>
-      </div>
-      <div id="lottie-animation"></div>
-    </section>
+      </section>
 
-    <section id="agenda" class="panel">
-      <div class="panel-header">
-        <h2>Próximas saídas & experiências</h2>
-        <p>
-          Escolha seu horário favorito ou participe de um dos formatos
-          especiais do clube.
-        </p>
-      </div>
-      <div class="grid">
-        <article class="slot">
-          <div class="slot-meta">Tee time premium</div>
-          <h3>06h40 - Sunrise Walk</h3>
-          <p>Fairways iluminados pela neblina, partida acompanhada por caddie.</p>
-          <button class="ghost">Reservar</button>
-        </article>
-        <article class="slot">
-          <div class="slot-meta">Clínica</div>
-          <h3>11h00 - Wedge Mastery</h3>
-          <p>90 minutos focados em distância controlada e controle de rotação.</p>
-          <button class="ghost">Inscrever</button>
-        </article>
-        <article class="slot">
-          <div class="slot-meta">Torneio</div>
-          <h3>Sábado - Stableford</h3>
-          <p>Field limitado a 64 jogadores, premiação gourmet e coquetel final.</p>
-          <button class="ghost">Garantir vaga</button>
-        </article>
-      </div>
-    </section>
+      <section class="panel highlights" aria-labelledby="destaques-title">
+        <div class="section-header">
+          <p class="eyebrow">Experiência completa</p>
+          <h2 id="destaques-title">Tudo o que um grande clube oferece</h2>
+          <p>
+            Estrutura pensada para treinos, partidas casuais ou torneios oficiais,
+            com serviços coordenados para cada momento do jogador.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-flag-checkered"></i></div>
+            <h3>Campo championship</h3>
+            <p>18 buracos par 72 com desenho costeiro, bunkers esculpidos e greens velozes.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+            <h3>Academia &amp; aulas</h3>
+            <p>Coaching personalizado, análise de swing e programas para todos os níveis.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-trophy"></i></div>
+            <h3>Torneios exclusivos</h3>
+            <p>Stableford, scrambles corporativos e pro-ams intimistas com hospitalidade.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-utensils"></i></div>
+            <h3>Gastronomia de autor</h3>
+            <p>Restaurante sazonal, adega climatizada e menu pós-jogo no terraço.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-shop"></i></div>
+            <h3>Pro Shop curado</h3>
+            <p>Equipamentos, fittings, moda e acessórios selecionados para performance.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-spa"></i></div>
+            <h3>Bem-estar</h3>
+            <p>Spa, vestiários premium e lounges com vista para o 18º green.</p>
+          </article>
+        </div>
+      </section>
 
-    <section id="clubhouse">
-      <div class="image" role="presentation"></div>
-      <div class="content">
-        <h2>Clubhouse com alma contemporânea</h2>
-        <p>
-          Salão envidraçado, adega climática, menu assinado por chef convidado e
-          terraço para acompanhar o pôr do sol sobre o 18º green.
-        </p>
-        <ul>
-          <li>Lounge com lareira, bar de assinatura e cigar room.</li>
-          <li>Spa para pós-jogo, vestiários com enxoval premium.</li>
-          <li>Pro shop com curadoria internacional e workshops sazonais.</li>
-        </ul>
-        <button>Conhecer espaços</button>
-      </div>
-    </section>
+      <section class="panel about" id="sobre" aria-labelledby="sobre-title">
+        <div class="section-header">
+          <p class="eyebrow">Sobre o clube</p>
+          <h2 id="sobre-title">Tradicional, mas em constante evolução</h2>
+          <p>
+            Nascemos há duas décadas na costa norte, abraçando a geografia natural
+            para criar um percurso técnico e belo. Hoje, recebemos jogadores que
+            buscam excelência, silêncio e serviço impecável.
+          </p>
+        </div>
+        <div class="about-grid">
+          <div class="about-block">
+            <h3>História e essência</h3>
+            <p>
+              O Elysian Fields foi concebido para integrar dunas, lagos e pinheiros em
+              um traçado estratégico. Cada buraco foi posicionado para aproveitar o
+              vento predominante e oferecer vistas abertas para o mar.
+            </p>
+            <ul>
+              <li>Fundado em 2005, com design inspirado nos links europeus.</li>
+              <li>Club house com assinatura arquitetônica contemporânea.</li>
+              <li>Equipe dedicada à experiência do jogador e da família.</li>
+            </ul>
+          </div>
+          <div class="about-block timeline">
+            <h3>Linha do tempo</h3>
+            <div class="timeline-item">
+              <span class="pill">2005</span>
+              <p>Inauguração do campo championship com 18 buracos.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="pill">2012</span>
+              <p>Ampliação da academia com áreas de fitting e simuladores.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="pill">2018</span>
+              <p>Renovação do club house, novos lounges e restaurante sazonal.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="pill">2024</span>
+              <p>Programa de sustentabilidade com reuso de água e energia solar.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <section id="experiencia-3d">
-      <h2>Explore nosso Buraco Assinatura</h2>
-      <canvas id="interactive-hole"></canvas>
-    </section>
+      <section class="panel course" id="campo" aria-labelledby="campo-title">
+        <div class="section-header">
+          <p class="eyebrow">O Campo</p>
+          <h2 id="campo-title">Desenho técnico, paisagem memorável</h2>
+          <p>
+            Fairways largos, greens ondulados e um microclima que permite jogo o ano
+            todo. O desenho oferece rotas agressivas e seguras para premiar decisões.
+          </p>
+        </div>
+        <div class="course-layout">
+          <div class="course-map">
+            <img src="images/course-overview.jpg" alt="Mapa ilustrativo do campo" />
+            <div class="map-overlay">
+              <div>
+                <h3>Dados principais</h3>
+                <p><strong>18 buracos</strong> · Par 72 · 7.140 jardas</p>
+                <p>Greens em Bermuda híbrida, fairways com drenagem rápida.</p>
+              </div>
+              <div class="map-tags">
+                <span class="pill">Driving range 14 baias</span>
+                <span class="pill">Putting green 1.000 m²</span>
+                <span class="pill">Club house 2.500 m²</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-features">
+            <article>
+              <h3>Driving range</h3>
+              <p>Baias cobertas, áreas de grama natural e alvos iluminados para treinos noturnos.</p>
+            </article>
+            <article>
+              <h3>Academia short game</h3>
+              <p>Complexo de wedges, bunkers variados e green de prática dedicado.</p>
+            </article>
+            <article>
+              <h3>Club house</h3>
+              <p>Lounge panorâmico, vestiários completos, spa e salas privativas para grupos.</p>
+            </article>
+            <article>
+              <h3>Restaurante &amp; bar</h3>
+              <p>Cozinha autoral, adega com curadoria, bar no terraço e serviço on course.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel gallery" aria-labelledby="galeria-title">
+        <div class="section-header">
+          <p class="eyebrow">Galeria</p>
+          <h2 id="galeria-title">Momentos que definem nosso clube</h2>
+          <p>Seleção de vistas do percurso, do club house e de eventos recentes.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure>
+            <img src="images/clubhouse.jpg" alt="Vista externa do club house" />
+            <figcaption>Terraço com vista para o green 18.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Fairway ao entardecer" />
+            <figcaption>Fairways largos banhados pelo pôr do sol.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80" alt="Jogadores alinhando putt" />
+            <figcaption>Greens rápidos e suaves para putts precisos.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1433838552652-f9a46b332c40?auto=format&fit=crop&w=900&q=80" alt="Restaurante do clube" />
+            <figcaption>Restaurante de autor com menu sazonal.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="panel tee-time" id="tee-time" aria-labelledby="tee-title">
+        <div class="section-header">
+          <p class="eyebrow">Tee Time</p>
+          <h2 id="tee-title">Reserve seu horário</h2>
+          <p>Escolha seu dia, informe o número de jogadores e nossa equipe confirmará rapidamente.</p>
+        </div>
+        <div class="form-grid">
+          <form class="form" id="tee-form" novalidate>
+            <div class="field">
+              <label for="nome">Nome completo</label>
+              <input id="nome" name="nome" type="text" required />
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="telefone">Telefone</label>
+              <input id="telefone" name="telefone" type="tel" required />
+            </div>
+            <div class="field">
+              <label for="jogadores">Número de jogadores</label>
+              <select id="jogadores" name="jogadores" required>
+                <option value="">Selecione</option>
+                <option>1 jogador</option>
+                <option>2 jogadores</option>
+                <option>3 jogadores</option>
+                <option>4 jogadores</option>
+              </select>
+            </div>
+            <div class="field two-col">
+              <div>
+                <label for="data">Data desejada</label>
+                <input id="data" name="data" type="date" required />
+              </div>
+              <div>
+                <label for="horario">Faixa de horário</label>
+                <select id="horario" name="horario" required>
+                  <option value="">Selecione</option>
+                  <option>Amanhecer (06h - 08h)</option>
+                  <option>Manhã (08h - 11h)</option>
+                  <option>Tarde (12h - 15h)</option>
+                  <option>Pôr do sol (15h - 17h)</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="observacoes">Observações</label>
+              <textarea id="observacoes" name="observacoes" rows="3" placeholder="Handicap, preferências ou necessidades especiais"></textarea>
+            </div>
+            <button type="submit" class="btn primary full">Enviar reserva</button>
+            <p class="form-feedback" aria-live="polite"></p>
+            <p class="form-hint">Integração pronta para endpoint /api/tee-time (POST JSON).</p>
+          </form>
+          <div class="form-aside">
+            <h3>Como funciona</h3>
+            <ol>
+              <li>Envie o formulário com o horário desejado.</li>
+              <li>Nossa concierge confirma disponibilidade e opções de caddie.</li>
+              <li>Receba confirmação por e-mail e SMS.</li>
+            </ol>
+            <div class="aside-card">
+              <h4>Benefícios para membros</h4>
+              <p>Bloqueio de tee times preferenciais, lockers privativos e descontos em aulas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel plans" id="planos" aria-labelledby="planos-title">
+        <div class="section-header">
+          <p class="eyebrow">Planos e associação</p>
+          <h2 id="planos-title">Escolha a melhor forma de viver o clube</h2>
+          <p>Compare benefícios e garanta acesso prioritário ao campo e aos eventos.</p>
+        </div>
+        <div class="card-grid pricing">
+          <article class="card plan">
+            <p class="pill">Green Fee</p>
+            <h3>Diária convidado</h3>
+            <p class="price">R$ 420</p>
+            <ul>
+              <li>18 buracos + carrinho compartilhado</li>
+              <li>Acesso ao driving range</li>
+              <li>Uso dos vestiários premium</li>
+            </ul>
+            <a class="btn ghost" href="#tee-time">Reservar</a>
+          </article>
+          <article class="card plan highlight">
+            <p class="pill">Preferido</p>
+            <h3>Plano mensal</h3>
+            <p class="price">R$ 1.280</p>
+            <ul>
+              <li>Tee times prioritários</li>
+              <li>2 aulas individuais / mês</li>
+              <li>Descontos no pro shop e restaurante</li>
+            </ul>
+            <a class="btn primary" href="#associacao">Quero ser sócio</a>
+          </article>
+          <article class="card plan">
+            <p class="pill">Membro pleno</p>
+            <h3>Plano anual</h3>
+            <p class="price">R$ 12.900</p>
+            <ul>
+              <li>Tee times ilimitados</li>
+              <li>Locker dedicado e bag storage</li>
+              <li>Convites para torneios exclusivos</li>
+            </ul>
+            <a class="btn ghost" href="#associacao">Falar com concierge</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel events" id="eventos" aria-labelledby="eventos-title">
+        <div class="section-header">
+          <p class="eyebrow">Torneios e eventos</p>
+          <h2 id="eventos-title">Calendário e resultados</h2>
+          <p>Forme sua equipe, participe de clinics ou acompanhe resultados recentes.</p>
+        </div>
+        <div class="event-grid">
+          <article class="event-card">
+            <div class="meta">Stableford · 30 março</div>
+            <h3>Taça Atlântico</h3>
+            <p>Field limitado, saída em ondas, premiação gourmet e coquetel no terraço.</p>
+            <a href="#contato" class="link">Inscrever-se</a>
+          </article>
+          <article class="event-card">
+            <div class="meta">Scramble · 13 abril</div>
+            <h3>Corporate Cup</h3>
+            <p>Formato 4 jogadores, kits personalizados, experiências VIP para convidados.</p>
+            <a href="#contato" class="link">Reservar equipe</a>
+          </article>
+          <article class="event-card">
+            <div class="meta">Clinic · 27 abril</div>
+            <h3>Short Game Lab</h3>
+            <p>Sessão prática com nossos profissionais focada em wedges e putting.</p>
+            <a href="#contato" class="link">Garantir vaga</a>
+          </article>
+        </div>
+        <div class="news">
+          <h3>Resultados recentes</h3>
+          <ul>
+            <li><strong>Classic Links</strong> · Campeão gross: João M. (68)</li>
+            <li><strong>Copa do Mar</strong> · Melhor net: equipe Costa Azul</li>
+            <li><strong>Match Play</strong> · Vitória de Ana R. no 17º green</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel lessons" id="aulas" aria-labelledby="aulas-title">
+        <div class="section-header">
+          <p class="eyebrow">Academia</p>
+          <h2 id="aulas-title">Aulas e programas personalizados</h2>
+          <p>Profissionais certificados, tecnologia de análise de swing e planos para cada nível.</p>
+        </div>
+        <div class="lessons-grid">
+          <div class="lesson-card">
+            <h3>Coaches</h3>
+            <p>Equipe liderada por profissionais PGA com experiência em torneios nacionais.</p>
+            <ul>
+              <li>Aulas individuais e em grupo</li>
+              <li>Pacotes para iniciantes em 4 semanas</li>
+              <li>Preparação para torneios e curso de regras</li>
+            </ul>
+          </div>
+          <div class="lesson-card">
+            <h3>Solicitar aula</h3>
+            <form class="form compact" id="lesson-form" novalidate>
+              <div class="field">
+                <label for="lesson-nome">Nome</label>
+                <input id="lesson-nome" name="lesson-nome" type="text" required />
+              </div>
+              <div class="field">
+                <label for="lesson-email">E-mail</label>
+                <input id="lesson-email" name="lesson-email" type="email" required />
+              </div>
+              <div class="field">
+                <label for="lesson-tipo">Tipo de aula</label>
+                <select id="lesson-tipo" name="lesson-tipo" required>
+                  <option value="">Selecione</option>
+                  <option>Iniciante</option>
+                  <option>Intermediário</option>
+                  <option>Avançado</option>
+                  <option>Pacote família</option>
+                </select>
+              </div>
+              <button type="submit" class="btn primary full">Solicitar</button>
+              <p class="form-feedback" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel proshop" id="proshop" aria-labelledby="proshop-title">
+        <div class="section-header">
+          <p class="eyebrow">Pro Shop</p>
+          <h2 id="proshop-title">Equipamentos e estilo</h2>
+          <p>Seleção curada de tacos, bolas, vestuário técnico e acessórios exclusivos.</p>
+        </div>
+        <div class="card-grid products">
+          <article class="card product">
+            <div class="product-media" role="presentation"></div>
+            <h3>Drivers tour</h3>
+            <p>Modelos ajustáveis com fitting completo e teste no range.</p>
+            <a class="btn ghost" href="#contato">Falar com especialista</a>
+          </article>
+          <article class="card product">
+            <div class="product-media alt" role="presentation"></div>
+            <h3>Vestuário técnico</h3>
+            <p>Polos, camadas térmicas e soft shells com proteção UV.</p>
+            <a class="btn ghost" href="#contato">Ver opções</a>
+          </article>
+          <article class="card product">
+            <div class="product-media" role="presentation"></div>
+            <h3>Acessórios essenciais</h3>
+            <p>Luvas, bolas premium, marcadores personalizados e gifts corporativos.</p>
+            <a class="btn ghost" href="#contato">Solicitar catálogos</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel association" id="associacao" aria-labelledby="associacao-title">
+        <div class="section-header">
+          <p class="eyebrow">Associação</p>
+          <h2 id="associacao-title">Junte-se à comunidade Elysian</h2>
+          <p>Benefícios exclusivos, eventos privados e tee times prioritários.</p>
+        </div>
+        <div class="association-grid">
+          <div>
+            <h3>Por que ser membro</h3>
+            <ul>
+              <li>Calendário exclusivo de torneios e viagens.</li>
+              <li>Convites para degustações, jantares e experiências culturais.</li>
+              <li>Rede de parceiros em clubes internacionais.</li>
+            </ul>
+          </div>
+          <div class="aside-card">
+            <h4>Fale com a concierge</h4>
+            <p>Conte-nos o que busca e prepararemos uma proposta personalizada.</p>
+            <a class="btn primary" href="#contato">Conectar agora</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel contact" id="contato" aria-labelledby="contato-title">
+        <div class="section-header">
+          <p class="eyebrow">Contato</p>
+          <h2 id="contato-title">Estamos prontos para receber você</h2>
+          <p>Envie uma mensagem ou visite-nos para conhecer o campo e o club house.</p>
+        </div>
+        <div class="contact-grid">
+          <form class="form" id="contato-form" novalidate>
+            <div class="field">
+              <label for="contato-nome">Nome</label>
+              <input id="contato-nome" name="contato-nome" type="text" required />
+            </div>
+            <div class="field">
+              <label for="contato-email">E-mail</label>
+              <input id="contato-email" name="contato-email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="contato-telefone">Telefone</label>
+              <input id="contato-telefone" name="contato-telefone" type="tel" />
+            </div>
+            <div class="field">
+              <label for="contato-assunto">Assunto</label>
+              <select id="contato-assunto" name="contato-assunto" required>
+                <option value="">Selecione</option>
+                <option>Visita guiada</option>
+                <option>Associação</option>
+                <option>Eventos corporativos</option>
+                <option>Outros</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="contato-mensagem">Mensagem</label>
+              <textarea id="contato-mensagem" name="contato-mensagem" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn primary full">Enviar mensagem</button>
+            <p class="form-feedback" aria-live="polite"></p>
+          </form>
+          <div class="contact-info">
+            <div class="info-block">
+              <h3>Endereço</h3>
+              <p>Estrada do Litoral, Km 12 · Costa Norte</p>
+              <p>Rio de Janeiro · RJ</p>
+            </div>
+            <div class="info-block">
+              <h3>Contato direto</h3>
+              <p>+55 21 5555-0101</p>
+              <p><a href="mailto:reservas@elysianfields.com">reservas@elysianfields.com</a></p>
+              <p><a href="https://wa.me/552155550101">WhatsApp exclusivo</a></p>
+            </div>
+            <div class="info-block">
+              <h3>Horários</h3>
+              <p>Campo: 06h às 18h</p>
+              <p>Restaurante: 12h às 23h</p>
+            </div>
+            <div class="map-placeholder" aria-label="Mapa do clube">
+              <p>Mapa do clube</p>
+              <span>Espaço para embed do mapa ou tour virtual.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer>
       <div class="footer-grid">
         <div>
-          <p class="brand">Elysian Fields Golf Club</p>
-          <p class="muted">Costa Norte · Par 72 · 7.140 jardas</p>
+          <p class="brand-title">Elysian Fields Golf Club</p>
+          <p>Costa Norte · Par 72 · 7.140 jardas</p>
         </div>
         <div>
-          <p class="muted">Reservas</p>
-          <a href="mailto:reservas@elysianfields.com">reservas@elysianfields.com</a>
-          <p class="muted">+55 21 5555-0101</p>
+          <p>Links rápidos</p>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#campo">O Campo</a></li>
+            <li><a href="#tee-time">Tee Time</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
         </div>
-        <div class="socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
+        <div>
+          <p>Conecte-se</p>
+          <div class="socials">
+            <a aria-label="Facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+            <a aria-label="Instagram" href="#"><i class="fab fa-instagram"></i></a>
+            <a aria-label="Twitter" href="#"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-cta">
+          <p>Pronto para jogar?</p>
+          <a class="btn primary" href="#tee-time">Reservar agora</a>
         </div>
       </div>
-      <p class="copyright">© 2025 Elysian Fields Golf Club</p>
+      <p class="copyright">© 2025 Elysian Fields Golf Club. Todos os direitos reservados.</p>
     </footer>
 
-    <div class="cursor"></div>
     <script src="js/app.js"></script>
   </body>
 </html>
